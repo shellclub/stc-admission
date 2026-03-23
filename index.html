@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>เข้าสู่ระบบ :: วิทยาลัยเทคนิคสุพรรณบุรี</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="swalert/dist/sweetalert2.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #2575fc;
+      --secondary-color: #6a11cb;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 450px;
+      padding: 15px;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .login-logo img {
+      height: 100px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    }
+
+    .login-logo b {
+      display: block;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .login-box-msg {
+      color: #666;
+      margin-bottom: 25px;
+      padding: 0;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      height: 50px;
+      padding-left: 45px;
+      border: 1px solid #ddd;
+      box-shadow: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(37, 117, 252, 0.2);
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 15px;
+      top: 17px;
+      color: #aaa;
+      z-index: 10;
+    }
+
+    .btn-login {
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+      border: none;
+      border-radius: 10px;
+      height: 50px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      color: #fff;
+    }
+
+    .footer-text {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .alert-banner {
+      background: #eef2f7;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 25px;
+      font-size: 13px;
+      color: #444;
+      border-left: 4px solid #28a745;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="images/logo_web.png" alt="Logo">
+      <b>ระบบทดสอบวัดความรู้</b>
+    </div>
+    
+    <div class="alert-banner text-left">
+      <i class="fa fa-info-circle text-success"></i> 
+      กรอกเลขบัตรประชาชนให้ตรงกันทั้ง 2 ช่อง เพื่อความถูกต้องในการเข้าสู่ระบบ
+    </div>
+
+    <form name="myform" action="check_data.php" method="post" onsubmit="return DoSubmit();">
+      <div class="form-group">
+        <i class="fa fa-id-card"></i>
+        <input type="number" class="form-control" placeholder="รหัสบัตรประชาชน ครั้งที่ 1" id="id_std1" name="id_std1" required>
+      </div>
+      
+      <div class="form-group">
+        <i class="fa fa-refresh"></i>
+        <input type="number" class="form-control" placeholder="รหัสบัตรประชาชน ครั้งที่ 2" id="id_std2" name="id_std2" required>
+      </div>
+
+      <button type="submit" class="btn btn-login">
+        เข้าสู่ระบบ <i class="fa fa-sign-in"></i>
+      </button>
+    </form>
+
+    <div class="footer-text">
+      พัฒนาโดย: นายศุภโชค พานทอง และ นายสุธีร์ แบนประเสริฐ<br>
+      แผนกวิชาอิเล็กทรอนิกส์ วิทยาลัยเทคนิคสุพรรณบุรี
+    </div>
+  </div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="swalert/dist/sweetalert2.min.js"></script>
+
+<script>
+  function DoSubmit() {
+    var id1 = document.myform.id_std1.value;
+    var id2 = document.myform.id_std2.value;
+
+    if (id1 === "" || id2 === "") {
+      return false;
+    }
+
+    if (id1 === id2) {
+      return true;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'ข้อมูลไม่ตรงกัน',
+        text: 'กรุณากรอกรหัสประจำตัวประชาชนให้ตรงกันทั้ง 2 ช่อง',
+        confirmButtonColor: '#2575fc'
+      });
+      return false;
+    }
+  }
+</script>
+</body>
+</html>
