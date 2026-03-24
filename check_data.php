@@ -5,7 +5,7 @@ mysqli_set_charset($conn,"utf8");
 $ids1 = mysqli_real_escape_string($conn, $_REQUEST['id_std1']);
 
 // 1. ตรวจสอบว่าเคยทำข้อสอบไปหรือยัง
-$sql_check = "SELECT * FROM tb_user_new WHERE idcard='$ids1' AND score > 0"; 
+$sql_check = "SELECT * FROM tb_user_new WHERE id='$ids1' AND score > 0"; 
 $result_check = $conn->query($sql_check); 
 
 if ($result_check->num_rows > 0) {
@@ -24,7 +24,7 @@ if ($result_check->num_rows > 0) {
           </script>";
 } else { 
     // 2. ดึงข้อมูลนักเรียนมาแสดงเพื่อยืนยัน
-    $sql = "SELECT * FROM tb_user_new WHERE idcard ='$ids1'"; 
+    $sql = "SELECT * FROM tb_user_new WHERE id ='$ids1'"; 
     $result = $conn->query($sql); 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc(); 
@@ -42,7 +42,7 @@ if ($result_check->num_rows > 0) {
                     Swal.fire({
                         icon: 'error',
                         title: 'ไม่พบข้อมูล',
-                        text: 'รหัสประจำตัวประชาชนไม่ถูกต้อง หรือไม่มีในระบบ',
+                        text: 'รหัสประจำตัวผู้สอบไม่ถูกต้อง หรือไม่มีในระบบ',
                         confirmButtonColor: '#3085d6'
                     }).then(() => { window.location='index.html'; });
                 });
