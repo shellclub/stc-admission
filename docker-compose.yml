@@ -27,7 +27,7 @@ services:
     ports:
       - "33020:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "technicalsuphanburi2023!!!"
       MYSQL_DATABASE: test
       MYSQL_USER: stc_user
       MYSQL_PASSWORD: stc_pass
@@ -37,7 +37,7 @@ services:
       - db_data:/var/lib/mysql
       - ./database_test.sql:/docker-entrypoint-initdb.d/01-init.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ptechnicalsuphanburi2023!!!"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -55,7 +55,7 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_USER: root
-      PMA_PASSWORD: root
+      PMA_PASSWORD: "technicalsuphanburi2023!!!"
       UPLOAD_LIMIT: 100M
     depends_on:
       db:

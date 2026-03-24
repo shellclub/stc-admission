@@ -2,7 +2,7 @@
 // Docker: use service name 'db' | Local: use 'localhost'
 $servername = "db";
 $username = "root";
-$password = "root";
+$password = "technicalsuphanburi2023!!!";
 $dbname = "test";
 
 // Create connection

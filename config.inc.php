@@ -2,7 +2,7 @@
 // Docker: use service name 'db' | Local: use 'localhost'
 $server = "db"; 
 $user = "root"; 
-$pass = "root"; 
+$pass = "technicalsuphanburi2023!!!"; 
 $db = "test"; 
 $conn = new mysqli($server, $user, $pass, $db);
 // Check connection
