@@ -34,7 +34,7 @@ if ($res_time && $row_time = $res_time->fetch_assoc()) {
     $elapsed = time() - $startTime;
 } else {
     $date_now = date('d/m/Y,H:i');
-    $conn->query("INSERT INTO tb_log_test (id, date_in,dete_log,num_test) VALUES ('$ids1', '$date_now', ,'','0')");
+    $conn->query("INSERT INTO tb_log_test (id, date_in,dete_log,num_test) VALUES ('$ids1', '$date_now','','0')");
     $elapsed = 0;
 }
 $remain_seconds = 3600 - $elapsed;
