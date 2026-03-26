@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # ─── PHP + Apache ───────────────────────────────────────
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stc-admission-web
+    ports:
+      - "8085:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    networks:
+      - stc-network
+    restart: unless-stopped
+
+  # ─── MySQL (MariaDB) ───────────────────────────────────
+  db:
+    image: mariadb:10.4
+    container_name: stc-admission-db
+    ports:
+      - "33020:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "technicalsuphanburi2023!!!"
+      MYSQL_DATABASE: test
+      MYSQL_USER: stc_user
+      MYSQL_PASSWORD: stc_pass
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_general_ci
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database_test.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ptechnicalsuphanburi2023!!!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - stc-network
+    restart: unless-stopped
+
+  # ─── phpMyAdmin ─────────────────────────────────────────
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: stc-admission-pma
+    ports:
+      - "8888:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 100M
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - stc-network
+    restart: unless-stopped
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  stc-network:
+    driver: bridge
