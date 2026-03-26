@@ -36,6 +36,7 @@
                 <div class="box-body">
                     <table class="table table-bordered">
                         <tr class="bg-gray">
+<<<<<<< HEAD
                             <th>id</th>
                             <th>name</th>
                              <th>major</th>
@@ -45,6 +46,16 @@
                             <td>4214681424</td>
                             <td>จันทร์ทิพย์ นายเฮ่อ</td>
                             <td>ช่างยนต์</td>
+=======
+                            <th>idcard</th>
+                            <th>id</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>0051011021757</td>
+                            <td>4214681424</td>
+                            <td>จันทร์ทิพย์ นายเฮ่อ</td>
+>>>>>>> 218be643305597fcf33c6a346a4e0de7fde02c34
                         </tr>
                     </table>
                     <p class="text-muted" style="margin-top:10px;">

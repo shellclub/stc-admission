@@ -73,7 +73,11 @@
                             <thead>
                                 <tr class="bg-gray-light">
                                     <th width="5%">#</th>
+<<<<<<< HEAD
                                     
+=======
+                                    <th>รหัสประชาชน</th>
+>>>>>>> 218be643305597fcf33c6a346a4e0de7fde02c34
                                     <th>รหัสผู้สมัคร</th>
                                     <th>ชื่อ-นามสกุล</th>
                                     <th>สาขา</th>

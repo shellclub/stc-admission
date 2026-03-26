@@ -101,7 +101,11 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
+<<<<<<< HEAD
                                      
+=======
+                                    <td><small><?php echo $row['idcard']; ?></small></td>
+>>>>>>> 218be643305597fcf33c6a346a4e0de7fde02c34
                                     <td><b class="text-primary"><?php echo $row['id']; ?></b></td>
                                     <td><?php echo $row['name']; ?></td>
                                     <td><?php echo $row['major']; ?></td>
