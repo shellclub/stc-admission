@@ -1,0 +1,206 @@
+<?php 
+ require('../config.inc.php');
+ mysqli_set_charset($conn,"utf8");
+?>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        ข้อมูลผู้ลงทะเบียน
+        <small>ข้อมูลผู้ลงทะเบียนสอบ </small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home_menu.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">ข้อมูลผู้ลงทะเบียนสอบ</a></li>
+        <li class="active">ข้อมูลผู้ลงทะเบียนสอบ</li>
+      </ol>
+    </section>
+<section class="content"> 
+        <div class="row">
+         <div class="col-xs-12">
+         <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">ข้อมูลผู้ลงทะเบียนสอบ</h3>
+            </div>
+
+            
+
+            <!-- /.box-header -->
+            <div class="box-body">
+               
+                <div >
+                         <p> <font color="#0000ff">  ส่งออกข้อมูล </font> <a href="export_excel_data_stu.php">  
+                           <img src="../images/excel.jpg" width="50">  </a></p>
+                </div>
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>ลำดับที่</th>
+                  <th>รหัสบัตรประชาชน</th>
+                  <th>รหัสผู้สมัคร</th>
+                  <th>ชื่อ</th>
+                  <th>สาขาที่สอบ</th>
+                  <th>ระดับชั้น</th>
+                  <th>สถานะ</th>
+                  <th>แก้ไขข้อมูล</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <?php 
+                    $i=1;
+                    $sql = "select * from tb_user_new   order by de_id ";
+                    $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $score = $row['score'];
+                           if($score==0) { 
+                             $pic = "icon_play.png";
+                             $sel = 1;
+                           }
+                           else if($score ==-1) {
+                             $pic = "icon_false.png";
+                             $sel =0;
+                           } 
+                           else {
+                             $pic = "icon_true.png";
+                             $sel =0;
+                           }
+                           
+
+                  ?>
+                  <td><?php echo $i  ?></td>
+                  <td><?php echo $row['idcard'];  ?></td>
+                  <td><?php echo $row['id'];  ?></td>
+                  <td><?php echo $row['name'];  ?></td>
+                  <td><?php echo $row['major']; ?></td>
+                  <td><?php  $data_level = "";
+                            if($row['level'] == 1) $data_level = "ปวช.";
+                            else if($row['level'] == 3) $data_level = "ปวส./ ปวช."; 
+                            else if($row['level'] ==2) $data_level =  "ปวส./ ม.6"; 
+                            else if($row['level'] ==4) $data_level =  "ป.ตรี"; 
+                            echo $data_level; ?></td>
+                  <td><?php if($sel==1){  ?>  <img src="../images/<?php echo $pic; ?>" width="25"><?php } else{  ?>
+                  <img src="../images/<?php echo $pic; ?>" width="25"> <?php } ?>
+                  </td>
+                  <td> 
+                    <?php if($score == -1) { ?>  
+                  <button type="button" class="btn btn-warning" data-toggle="modal" 
+                          data-target="#exampleModal" 
+                          data-whatever="<?php echo $row['id']; ?>"
+                          data-stdid="<?php echo $row['std_id']; ?>"
+                          data-stdfname="<?php echo $row['std_fname']; ?>"
+                          data-stdlname="<?php echo $row['std_lname']; ?>"
+                          data-stdselect = "<?php echo $data_level; ?>"
+                          data-stdlevel="<?php echo substr($row['std_id'],0,1); ?>"
+                          >แก้ไขข้อมูล</button>
+                     <?php } else  echo "ไม่สามารถแก้ไขข้อมูลได้" ?>
+                  </td>
+                </tr>
+                  <?php $i++; }} ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                <th>ลำดับที่</th>
+                  <th>รหัสบัตรประชาชน</th>
+                  <th>รหัสผู้สมัคร</th>
+                  <th>ชื่อ</th>
+                  <th>สาขาที่สอบ</th>
+                  <th>ระดับชั้น</th>
+                  <th>สถานะ</th>
+                  <th>แก้ไขข้อมูล</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col --
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+   
+ 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล   </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="edit_data_std_all.php" method="post" enctype="multipart/form">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">รหัสข้อมูล:</label>
+            <input type="text" class="form-control" id="id"  name="id" readonly>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">รหัสผู้สมัคร:</label>
+            <input type="text" class="form-control" id="stdid"  name="std_id">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">ชื่อ</label>
+            <input type="text" class="form-control" id="stdfname"  name="std_fname">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">นามสกุล</label>
+            <input type="text" class="form-control" id="stdlname"  name="std_lname">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">พื้นฐานความรู้เดิม</label>
+            <input type="text" class="form-control" id="stdlevel"  name="std_level">
+          </div>
+           
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก  </button>
+        <button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever')
+  var stdid = button.data('stdid')
+  var stdfname = button.data('stdfname') 
+  var stdlname = button.data('stdlname') 
+  var stdselect = button.data('stdselect')
+  //var stdlevel = button.data('stdlevel') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('แก้ไขข้อมูลผู้สมัคร ' + recipient)
+  //modal.find('.modal-body input').val(recipient)
+  modal.find('.modal-body #id').val(recipient)
+  modal.find('.modal-body #stdid').val(stdid)
+  modal.find('.modal-body #stdfname').val(stdfname)
+  modal.find('.modal-body #stdlname').val(stdlname)
+  modal.find('.modal-body #stdlevel').val(stdselect)
+  //modal.find('.modal-body #stdlevel').val(stdlevel)
+})
+
+</script>

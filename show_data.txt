@@ -1,0 +1,57 @@
+<?php for($a=0;$a<=9;$a++) { ?> 
+                <?php for($i=($a*10);$i<($a*10)+10;$i++){    ?>
+                     <!-- div head -->
+                            <div class="box box-danger">
+                                <div class="box-header with-border">
+                                    <h3 class="text-primary">ข้อที่ <?php echo $i+1; ?>:</h3>                                     
+                                        <?php if($img_q[$i]!=''){ ?>  
+                                        <img  src="ImagesQuestions/<?php echo $img_q[$i];  ?>" />
+                                         <?php } ?>                                   
+                                        <h4><?php echo $question[$i];   ?> </h4>
+                                </div>
+                                <div class="box-body">
+                                   <div class="btn-group" data-toggle="buttons">
+                                    <div class="col-md-12">
+                                         <div class="col-sm-6">
+                                           <label class="btn btn-purple btn-rounded btn-md form-check-label">
+                                                 <input type="radio" class="form-check-input"   name="select_<?php echo $id_s[$i];  ?>" onchange="radio_check(<?php echo $i+1 ?>);"  value="1"><?php if($choice1_img[$i]!='')  { ?>
+                                                    <img  src="ImagesQuestions/<?php echo $choice1_img[$i];  ?>" />
+                                                    <?php } ?> <p class="lead">  <?php echo $choice1[$i]; ?> </p>
+                                            </lable>          
+                                        </div>   
+                                        <div class="col-sm-6"> 
+                                            <label class="btn btn-purple btn-rounded btn-md form-check-label">
+                                                 <input type="radio"  class="form-check-input" name="select_<?php echo $id_s[$i];  ?>" onchange="radio_check(<?php echo $i+1 ?>);" value="2"><?php if($choice2_img[$i]!='')  { ?>
+                                                    <img  src="ImagesQuestions/<?php echo $choice2_img[$i];  ?>" />
+                                                    <?php } ?> <p class="lead">  <?php echo $choice2[$i]; ?> </p>  
+                                             </lable>
+                                        </div>  
+                                    </div>
+                                    <div class="col-md-12">  
+                                        <div class="col-sm-6"> 
+                                               <label class="btn btn-purple btn-rounded btn-md form-check-label">
+                                                 <input type="radio"   class="form-check-input" name="select_<?php echo $id_s[$i];  ?>" onchange="radio_check(<?php echo $i+1 ?>);" value="3"><?php if($choice3_img[$i]!='')  { ?>
+                                                    <img  src="ImagesQuestions/<?php echo $choice3_img[$i];  ?>" />
+                                                    <?php } ?> <p class="lead">  <?php echo $choice3[$i]; ?> </p>  
+                                                </lable>
+                                        </div> 
+                                        <div class="col-sm-6">  
+                                             <label class="btn btn-purple btn-rounded btn-md form-check-label">
+                                                 <input type="radio"  class="form-check-input"  name="select_<?php echo $id_s[$i];  ?>" onchange="radio_check(<?php echo $i+1 ?>);" value="4"><?php if($choice4_img[$i]!='')  { ?>
+                                                    <img  src="ImagesQuestions/<?php echo $choice4_img[$i];  ?>" />
+                                                    <?php } ?> <p class="lead">  <?php echo $choice4[$i]; ?> </p> 
+                                             </label> 
+                                         </div>       
+                                     </div>                 
+                                                                           
+                                </div>
+                              </div>
+                           
+                         
+              
+                       <!-- div close 1/2 page -->
+                <?php } ?>
+            </div>
+            <?php } ?> 
+            
+       </div>
