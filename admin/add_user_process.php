@@ -4,7 +4,7 @@ mysqli_set_charset($conn, "utf8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // รับค่าและป้องกัน SQL Injection
-    $idcard = mysqli_real_escape_string($conn, $_POST['idcard']);
+   // $idcard = mysqli_real_escape_string($conn, $_POST['idcard']);
     $id     = mysqli_real_escape_string($conn, $_POST['id']);
     $name   = mysqli_real_escape_string($conn, $_POST['name']);
     $de_id  = mysqli_real_escape_string($conn, $_POST['de_id']);
@@ -23,18 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // 2. ตรวจสอบข้อมูลซ้ำ (ID หรือ เลขบัตร)
-    $check_sql = "SELECT id FROM tb_user_new WHERE id = '$id' OR idcard = '$idcard' LIMIT 1";
+    $check_sql = "SELECT id FROM tb_user_new WHERE id = '$id'   LIMIT 1";
     $check_res = $conn->query($check_sql);
 
     if ($check_res->num_rows > 0) {
         echo "<script>
-            Swal.fire('ข้อมูลซ้ำ!', 'รหัสผู้สอบหรือเลขบัตรประชาชนนี้มีอยู่ในระบบแล้ว', 'warning')
+            Swal.fire('ข้อมูลซ้ำ!', 'รหัสผู้สอบ นี้มีอยู่ในระบบแล้ว', 'warning')
             .then(() => { window.history.back(); });
         </script>";
     } else {
         // 3. บันทึกข้อมูลลง tb_user_new
-        $sql = "INSERT INTO tb_user_new (idcard, id, name, major, de_id, level, score) 
-                VALUES ('$idcard', '$id', '$name', '$major', '$de_id', '$level', '0')";
+        $sql = "INSERT INTO tb_user_new ( id, name, major, de_id, level, score) 
+                VALUES ( '$id', '$name', '$major', '$de_id', '$level', '0')";
         
         if ($conn->query($sql)) {
             echo "<script>

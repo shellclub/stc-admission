@@ -37,12 +37,7 @@ $res_dept = $conn->query($sql_dept);
                     <div class="box-body" style="padding: 30px;">
                         
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="label-title">เลขบัตรประชาชน (13 หลัก)</label>
-                                    <input type="text" name="idcard" class="form-control input-custom" maxlength="13" placeholder="กรอกเลขบัตรประชาชน" required>
-                                </div>
-                            </div>
+                             
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="label-title">รหัสประจำตัวผู้สอบ (ID)</label>
